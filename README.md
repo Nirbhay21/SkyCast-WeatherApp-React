@@ -107,46 +107,46 @@ A modern, responsive weather application built with React, TypeScript, and Vite.
 
 ```
 src/
-├── app/                    # Redux store configuration
-│   ├── config.ts          # API configuration
-│   └── store.ts           # Redux store setup
-├── assets/                # Static assets
+├── app/                            # Redux store configuration
+│   ├── config.ts                   # API configuration
+│   └── store.ts                    # Redux store setup
+├── assets/                         # Static assets
 │   ├── logo-dark.png
 │   └── logo-light.png
-├── components/            # Reusable components
-│   ├── ui/               # Base UI components (shadcn/ui)
-│   ├── skeletons/        # Loading skeleton components
-│   ├── CitySearch.tsx    # City search functionality
-│   ├── CurrentWeather.tsx # Current weather display
-│   ├── Header.tsx        # Application header
-│   ├── Layout.tsx        # Main layout wrapper
-│   └── ...               # Other components
-├── context/              # React contexts
-│   └── theme-provider.tsx # Theme context
-├── features/             # Feature-based modules
-│   └── api/              # API slices
-│       ├── geoApiSlice.ts     # Geocoding API
-│       └── weatherApiSlice.ts # Weather API
-├── hooks/                # Custom React hooks
-│   ├── use-favorite.tsx  # Favorite cities management
-│   ├── use-geolocation.tsx # Geolocation handling
-│   ├── use-locale-storage.tsx # Local storage wrapper
-│   └── use-search-history.tsx # Search history management
-├── lib/                  # Utility functions
-│   └── utils.ts          # Common utilities
-├── pages/                # Page components
-│   ├── city-page.tsx     # Individual city page
-│   └── weather-dashboard.tsx # Main dashboard
-├── types/                # TypeScript type definitions
-│   ├── forecast.ts       # Forecast data types
-│   ├── geocoding.ts      # Geocoding types
-│   ├── location.ts       # Location types
-│   ├── search-history.ts # Search history types
-│   ├── weather.ts        # Weather data types
-│   └── index.ts          # Type exports
-├── App.tsx               # Root component
-├── index.css            # Global styles
-└── main.tsx             # Application entry point
+├── components/                     # Reusable components
+│   ├── ui/                         # Base UI components (shadcn/ui)
+│   ├── skeletons/                  # Loading skeleton components
+│   ├── CitySearch.tsx              # City search functionality
+│   ├── CurrentWeather.tsx          # Current weather display
+│   ├── Header.tsx                  # Application header
+│   ├── Layout.tsx                  # Main layout wrapper
+│   └── ...                         # Other components
+├── context/                        # React contexts
+│   └── theme-provider.tsx          # Theme context
+├── features/                       # Feature-based modules
+│   └── api/                        # API slices
+│       ├── geoApiSlice.ts          # Geocoding API
+│       └── weatherApiSlice.ts      # Weather API
+├── hooks/                          # Custom React hooks
+│   ├── use-favorite.tsx            # Favorite cities management
+│   ├── use-geolocation.tsx         # Geolocation handling
+│   ├── use-locale-storage.tsx      # Local storage wrapper
+│   └── use-search-history.tsx      # Search history management
+├── lib/                            # Utility functions
+│   └── utils.ts                    # Common utilities
+├── pages/                          # Page components
+│   ├── city-page.tsx               # Individual city page
+│   └── weather-dashboard.tsx       # Main dashboard
+├── types/                          # TypeScript type definitions
+│   ├── forecast.ts                 # Forecast data types
+│   ├── geocoding.ts                # Geocoding types
+│   ├── location.ts                 # Location types
+│   ├── search-history.ts           # Search history types
+│   ├── weather.ts                  # Weather data types
+│   └── index.ts                    # Type exports
+├── App.tsx                         # Root component
+├── index.css                       # Global styles
+└── main.tsx                        # Application entry point
 ```
 
 ## 🔧 Configuration
