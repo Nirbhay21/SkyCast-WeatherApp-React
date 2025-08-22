@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useTheme } from "../context/theme-provider"
+import { useTheme } from "../context/use-theme"
 import LogoDark from "../assets/logo-dark.png"
 import LogoLight from "../assets/logo-light.png"
 import { Moon, Sun } from "lucide-react"

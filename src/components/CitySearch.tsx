@@ -8,17 +8,29 @@ import { useNavigate } from "react-router-dom";
 import { useSearchHistory } from "../hooks/use-search-history";
 import { format } from "date-fns";
 import { useFavorite } from "../hooks/use-favorite";
+import { useDebounce } from "../lib/utils";
 
+/**
+ * CitySearch component provides a command palette dialog for searching cities,
+ * viewing favorites, and accessing recent search history.
+ * Integrates with favorites and search history hooks, and navigates to city pages.
+ */
 const CitySearch = () => {
     const [open, setOpen] = useState<boolean>(false);
     const [query, setQuery] = useState<string>("");
+    const debouncedQuery = useDebounce(query, 400);
     const navigate = useNavigate();
 
-    const locations = useGetLocationsQuery(query, {
-        skip: !query || query.length < 3
+    const locations = useGetLocationsQuery(debouncedQuery, {
+        skip: !debouncedQuery || debouncedQuery.length < 3
     });
     const { history, addToHistory, clearHistory } = useSearchHistory();
 
+    /**
+     * Handles selection of a city from the command palette.
+     * Adds the city to search history and navigates to the city page.
+     * @param cityData - Stringified city data in the format "lat|lon|name|country"
+     */
     const handleSelect = (cityData: string) => {
         const [lat, lon, name, country] = cityData.split("|");
 
@@ -37,16 +49,29 @@ const CitySearch = () => {
 
     return (
         <>
-            <Button variant="outline" onClick={() => setOpen(true)} className="relative justify-start sm:pr-12 sm:w-52 md:w-52 lg:w-64 xs:w-44 text-muted-foreground text-sm">
-                <Search className="mr-2 w-4 h-4" />
+            <Button
+                variant="outline"
+                onClick={() => setOpen(true)}
+                className="relative justify-start sm:pr-12 sm:w-52 md:w-52 lg:w-64 xs:w-44 text-muted-foreground text-sm"
+                aria-label="Open city search dialog"
+            >
+                <Search className="mr-2 w-4 h-4" aria-hidden="true" focusable="false" />
                 <span>Search Cities...</span>
             </Button>
 
-            <CommandDialog open={open} onOpenChange={setOpen}>
+            <CommandDialog
+                open={open}
+                onOpenChange={setOpen}
+                aria-label="City search dialog"
+            >
                 <CommandInput placeholder="Search Cities..." value={query} onValueChange={setQuery} />
                 <CommandList>
                     {(query.length > 2 && !locations.isFetching && (
-                        <CommandEmpty>No Cities found.</CommandEmpty>
+                        <CommandEmpty>
+                            <span role="status" aria-live="polite">
+                                No cities found for "{query}". Try another search.
+                            </span>
+                        </CommandEmpty>
                     ))}
                     {favorites.length > 0 && (
                         <CommandGroup heading="Favorites">
@@ -109,8 +134,9 @@ const CitySearch = () => {
                             <CommandSeparator />
                             <CommandGroup heading="Suggestions">
                                 {locations.isFetching && (
-                                    <div className="flex justify-center items-center p-4">
-                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                    <div className="flex justify-center items-center p-4" role="status" aria-live="polite">
+                                        <Loader2 className="w-4 h-4 animate-spin" aria-label="Loading city suggestions" />
+                                        <span className="ml-2 text-muted-foreground text-sm">Loading suggestions...</span>
                                     </div>
                                 )}
                                 {locations?.data?.map((location) => (
